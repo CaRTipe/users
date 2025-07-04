@@ -8,5 +8,14 @@ document.getElementById("clientForm").addEventListener("submit", function (e) {
   const age = parseInt(document.getElementById("age").value);
   const car = document.getElementById("car").value;
 
-  addClients(fname, lname, email, gender, age, car); // Call your function
+  // Call the addClients function from the window object
+  if (typeof window.addClients === 'function') {
+    window.addClients(fname, lname, email, gender, age, car);
+    
+    // Reset the form after submission
+    document.getElementById("clientForm").reset();
+  } else {
+    console.error("addClients function is not available");
+    alert("Error: Could not add client. The system is not properly initialized.");
+  }
 });
